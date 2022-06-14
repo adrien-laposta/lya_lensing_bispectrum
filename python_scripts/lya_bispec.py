@@ -24,6 +24,15 @@ class LyaBispec:
         """
         return self.forest.cambResults.comoving_radial_distance(z) * self.h
 
+    def get_z_from_chi(self, chi):
+        """
+        Get the redshift associated with the
+        comoving distance chi (Mpc/h)
+
+        Parameters:
+        chi: 1D array
+        """
+        return self.forest.cambResults.redshift_at_comoving_radial_distance(chi / self.h)
 
     def lensing_eff_kernel_z(self, z):
         """
@@ -61,8 +70,10 @@ class LyaBispec:
                   self.forest.cambResults.get_Omega("baryon"))
         c = 3e5
         chistar = self.get_chi_from_z(1100)
+        z = self.get_z_from_chi(chi)
+        a = 1 / (1 + z)
 
-        return 1.5 * omegam * (100 / c) ** 2 * chi * (chistar - chi) / chistar
+        return 1.5 * omegam * (100 / c) ** 2 * chi * (chistar - chi) / chistar / a
 
 
     def wiener_filter(self, kPerp, exp):
@@ -105,6 +116,7 @@ class LyaBispec:
           width of the forest in Mpc/h
         """
         k = np.sqrt(q**2 + kPerp**2)
+        # np.sinc(x) = sin(pi * x) / (pi * x)
         return self.forest.p3dMatter(self.z, k) * np.sinc(q*deltachi/2/np.pi)
 
 
@@ -124,18 +136,19 @@ class LyaBispec:
         """
         k = lambda q: np.sqrt(q**2+kPerp**2)
 
-        z_down, z_up = self.z - deltaZ, self.z + deltaZ
+        z_down, z_up = self.z - deltaZ / 2, self.z + deltaZ / 2
 
         chiUp = self.get_chi_from_z(z_up)
         chiDown = self.get_chi_from_z(z_down)
         deltaChi = chiUp - chiDown
 
         chiForest = self.get_chi_from_z(self.z)
-        from test_fft import fft
+        from test_fft import ifft
 
         q = np.linspace(-1e1, 1e1, 2001)
         Fq = self.integrand_fft_p2d_delta_kappa(q, kPerp, deltaChi)
-        chis, Fchi = fft(q, Fq)
+        #chis, Fchi = fft(q, Fq)
+        chis, Fchi = ifft(q, Fq)
         Fchi = np.abs(Fchi)
 
         id = np.where((chis >= -deltaChi/2) | (chis <= deltaChi/2))
