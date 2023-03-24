@@ -1,0 +1,37 @@
+# This is a parameter file for the Lya forest - kappa
+# forecasting code. The main variables and options are
+# described and defined here.
+
+data_dir = '../data'
+output_dir = 'outputs'
+
+# Define the path to AIP+15 fitting function parameters.
+aip15_tables_dir = f"{data_dir}/aip15_table"
+aip15_table_planck = f"{aip15_tables_dir}/aip_table_planck.csv"
+aip15_table_low_s8 = f"{aip15_tables_dir}/aip_table_s064.csv"
+aip15_table_mid_s8 = f"{aip15_tables_dir}/aip_table_s076.csv"
+aip15_table_hi_s8 = f"{aip15_tables_dir}/aip_table_s088.csv"
+
+# Define the path to AIP+15 extrapolation parameters
+aip15_extrapolation_dir = f"{output_dir}/aip15_parameter_extrapolation"
+aip15_extrapolation_file = f"{aip15_extrapolation_dir}/aip15_fit_results.pkl"
+
+# J. Guy GitHub data (https://github.com/julienguy/simplelyaforecast)
+snr_file = f"{data_dir}/lya-snr-fuji-sv3.fits"
+
+# P1D and response files from Chiang+17
+chiang17_p1d_file = f"{data_dir}/chiang17_data/chiang_17_p1d.dat"
+chiang17_response_file = f"{data_dir}/chiang17_data/dp1d_chiang.dat"
+
+# Define the path to Chiang+17 extrapolation parameters
+chiang17_extrapolation_file = f"{data_dir}/chiang17_response_extrapolation/chiang17_response_extrapolation_pars.pkl"
+zref = "3.0"
+
+# Define the cosmology (Planck 18)
+cosmo_params = {"cosmomc_theta": 0.0104092, "ombh2": 0.02237, "omch2": 0.1200, "tau": 0.0544, "As": 2.1e-9, "ns": 0.9649}
+
+# Survey area
+areas = {"ACT+DESI-Y1": 1500, "Planck+DESI-Y5": 13000, "SO+DESI-Y5": 5000, "ACT+DESI-Y5": 5000, "SO+DESI-Y1": 1500}
+
+# Associated lensing files
+clkk_files = {"ACT+DESI-Y1": "dr6_prelim", "Planck+DESI-Y5": "planck", "SO+DESI-Y5": "so", "ACT+DESI-Y5": "dr6_prelim", "SO+DESI-Y1": "so"}
