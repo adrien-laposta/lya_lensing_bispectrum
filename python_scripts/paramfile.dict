@@ -2,10 +2,17 @@
 # forecasting code. The main variables and options are
 # described and defined here.
 
+# Data directory
 data_dir = '../data'
-output_dir = 'outputs'
+
+# Where to save useful files
+output_dir = 'outputs_now'
+
+# Do you want to use finite differences to get the response
+extrapolate_chiang_response = True
 
 # Define the path to AIP+15 fitting function parameters.
+# We need these tables to get the P3D
 aip15_tables_dir = f"{data_dir}/aip15_table"
 aip15_table_planck = f"{aip15_tables_dir}/aip_table_planck.csv"
 aip15_table_low_s8 = f"{aip15_tables_dir}/aip_table_s064.csv"
@@ -13,9 +20,14 @@ aip15_table_mid_s8 = f"{aip15_tables_dir}/aip_table_s076.csv"
 aip15_table_hi_s8 = f"{aip15_tables_dir}/aip_table_s088.csv"
 
 # Define the path to AIP+15 extrapolation parameters
+# We need to extrapolate these quantities outside of the redshift range
 aip15_extrapolation_dir = f"{output_dir}/aip15_parameter_extrapolation"
-aip15_extrapolation_file = f"{aip15_extrapolation_dir}/aip15_fit_results.pkl"
+aip15_extrapolation_file_planck = f"{aip15_extrapolation_dir}/aip15_fit_results_planck.pkl"
+aip15_extrapolation_file_hi_s8 = f"{aip15_extrapolation_dir}/aip15_fit_results_hi_s8.pkl"
+aip15_extrapolation_file_mid_s8 = f"{aip15_extrapolation_dir}/aip15_fit_results_mid_s8.pkl"
+aip15_extrapolation_file_low_s8 = f"{aip15_extrapolation_dir}/aip15_fit_results_low_s8.pkl"
 
+# Signal-to-noise for the QSOs
 # J. Guy GitHub data (https://github.com/julienguy/simplelyaforecast)
 snr_file = f"{data_dir}/lya-snr-fuji-sv3.fits"
 
@@ -24,14 +36,15 @@ chiang17_p1d_file = f"{data_dir}/chiang17_data/chiang_17_p1d.dat"
 chiang17_response_file = f"{data_dir}/chiang17_data/dp1d_chiang.dat"
 
 # Define the path to Chiang+17 extrapolation parameters
-chiang17_extrapolation_file = f"{data_dir}/chiang17_response_extrapolation/chiang17_response_extrapolation_pars.pkl"
+chiang17_extrapolation_dir = f"{output_dir}/chiang17_response_extrapolation"
+chiang17_extrapolation_file = f"{chiang17_extrapolation_dir}/chiang17_response_extrapolation_pars.pkl"
 zref = "3.0"
 
 # Define the cosmology (Planck 18)
 cosmo_params = {"cosmomc_theta": 0.0104092, "ombh2": 0.02237, "omch2": 0.1200, "tau": 0.0544, "As": 2.1e-9, "ns": 0.9649}
 
 # Survey area
-areas = {"ACT+DESI-Y1": 1500, "Planck+DESI-Y5": 13000, "SO+DESI-Y5": 5000, "ACT+DESI-Y5": 5000, "SO+DESI-Y1": 1500}
+areas = {"ACT+DESI-Y1": 1500, "Planck+DESI-Y5": 13000, "SO+DESI-Y5": 5000, "ACT+DESI-Y5": 5000, "SO+DESI-Y1": 1500, "CMB-S4+DESI-Y5": 5000}
 
 # Associated lensing files
-clkk_files = {"ACT+DESI-Y1": "dr6_prelim", "Planck+DESI-Y5": "planck", "SO+DESI-Y5": "so", "ACT+DESI-Y5": "dr6_prelim", "SO+DESI-Y1": "so"}
+clkk_files = {"ACT+DESI-Y1": "dr6_prelim", "Planck+DESI-Y5": "planck", "SO+DESI-Y5": "so", "ACT+DESI-Y5": "dr6_prelim", "SO+DESI-Y1": "so", "CMB-S4+DESI-Y5": "cmbs4"}
