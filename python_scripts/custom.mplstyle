@@ -1,0 +1,51 @@
+axes.linewidth: 2
+#axes.prop_cycle    : cycler('color', ['E24A33', 'AEC7E8', 'FF07FE', 'FFBB78', '2CA02C', '98DF8A', 'D62728', 'FF9896', '9467BD', 'C5B0D5', '8C564B', 'C49C94', 'E377C2', 'F7B6D2', '7F7F7F', 'C7C7C7', 'BCBD22', 'DBDB8D', '17BECF', '9EDAE5'])
+#6colors
+#axes.prop_cycle     : cycler('color', ['4053D3', 'DDB310', 'B51D14', '00BEFF', 'FB49B0', '00B25D', 'CACACA'])
+axes.prop_cycle    : cycler('color', ['EBAC23', 'B80058', '008CF9', '006E00', '00BBAD', 'D163E6', 'B24502', 'FF9287', '5954D6', '00C6F8', '878500', '00A76C', 'BDBDBD'])
+lines.linewidth: 2
+
+axes.labelsize: 18
+axes.titlesize: 18
+
+#axes.grid: True
+#axes.grid.axis: both
+#axes.grid.which: both
+
+#grid.linestyle: dotted
+#grid.linewidth: 0.8
+#grid.alpha: 0.5
+xtick.labelsize: 17
+
+xtick.major.size: 5
+xtick.major.width: 2
+xtick.minor.size: 3
+xtick.minor.width: 1
+
+xtick.major.pad: 6
+xtick.direction: in
+ytick.labelsize: 17
+
+ytick.major.size: 5
+ytick.major.width: 2
+ytick.minor.size: 3
+ytick.minor.width: 1
+
+ytick.major.pad: 6
+ytick.direction: in
+
+legend.fontsize: 17
+legend.frameon: True
+legend.edgecolor: black
+
+patch.antialiased: True
+font.family: serif
+font.serif: Computer Modern Roman
+text.usetex : True
+
+#from matplotlib import rc
+#rc('font',**{'size':'12','family':'sans-serif','sans-serif':['Computer Modern Sans serif']})
+#rc('text', usetex=True)
+#rc('text.latex', preamble='\usepackage{amsmath}, \usepackage{amssymb}')
+#rc('font', size=16)
+#rc('legend',**{'fontsize':'18'})
