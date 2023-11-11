@@ -6,23 +6,33 @@ from scipy.optimize import minimize
 import matplotlib.pyplot as plt
 import numpy as np
 import pickle
+import argparse
+from dict_tools import so_dict
 import os
 
-plt.style.use("~/Desktop/custom.mplstyle")
+plt.style.use("custom.mplstyle")
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-d", "--dict_file", help = "Dict file")
+
+args = parser.parse_args()
+dict_file = args.dict_file
+
+d = so_dict()
+d.read_from_file(dict_file)
 
 # Define data paths
-data_dir = "../data/chiang17_data"
-p1d_file = "chiang_17_p1d.dat"
-p1d_response_file = "dp1d_chiang.dat"
+p1d_file = d["chiang17_p1d_file"]
+p1d_response_file = d["chiang17_response_file"]
 
 # Define output directory
-output_dir = "chiang17_response_extrapolation"
+output_dir = d["chiang17_extrapolation_dir"]
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
 # Load the tables
-p1d_table = np.loadtxt(f"{data_dir}/{p1d_file}").T
-p1d_response_table = np.loadtxt(f"{data_dir}/{p1d_response_file}").T
+p1d_table = np.loadtxt(p1d_file).T
+p1d_response_table = np.loadtxt(p1d_response_file).T
 
 # Store the p1d and the response in a dict
 p1d_dict = {}
@@ -305,4 +315,4 @@ for z_ref_str in z_str_list:
 
 # Save useful quantities
 pickle.dump(logp1d_response_dict, open(f"{output_dir}/chiang17_logp1d_response.pkl", "wb"))
-pickle.dump(output_parameters, open(f"{output_dir}/chiang17_response_extrapolation_pars.pkl", "wb"))
+pickle.dump(output_parameters, open(d["chiang17_extrapolation_file"], "wb"))
